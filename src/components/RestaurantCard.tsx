@@ -4,9 +4,14 @@ import { getRestaurantImage, getCuisineType } from "../utils";
 interface RestaurantCardProps {
   restaurant: Restaurant;
   index: number;
+  distance?: number;
 }
 
-export const RestaurantCard = ({ restaurant, index }: RestaurantCardProps) => {
+export const RestaurantCard = ({
+  restaurant,
+  index,
+  distance,
+}: RestaurantCardProps) => {
   const name = restaurant.display_name.split(",")[0];
   const cuisineType = getCuisineType(name);
 
@@ -36,7 +41,14 @@ export const RestaurantCard = ({ restaurant, index }: RestaurantCardProps) => {
 
         <div className="mt-4 flex items-center justify-between border-t pt-4">
           <div className="text-sm text-gray-500">₹200 for two</div>
-          <div className="text-sm text-orange-600">30-40 mins</div>
+          <div className="flex items-center gap-2">
+            {distance !== undefined && (
+              <div className="text-sm text-blue-600 font-medium">
+                {distance} km
+              </div>
+            )}
+            <div className="text-sm text-orange-600">30-40 mins</div>
+          </div>
         </div>
       </div>
     </div>
